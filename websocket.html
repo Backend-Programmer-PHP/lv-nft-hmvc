@@ -1,0 +1,12 @@
+<label>Price : </label>
+<p id="bnb" data-qantity="2.2">2.2</p>
+<p>~ $<span id="bnbprice">0</span></p>
+<script>
+    let socket = new WebSocket("wss://stream.binance.com:9443/ws/bnbusdt@kline_1m");
+    socket.onmessage = function (e) {
+        //console.log(e.data)
+        let data = JSON.parse(e.data);
+        let bnb = parseFloat(document.querySelector("#bnb").getAttribute("data-qantity"));
+        document.querySelector("#bnbprice").innerHTML = bnb * parseFloat(data.k.c).toFixed(2);
+    }
+</script>
